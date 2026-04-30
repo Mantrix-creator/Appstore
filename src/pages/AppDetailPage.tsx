@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { marked } from "marked";
+import DOMPurify from "dompurify";
 import { getReadme } from "../lib/github";
 import { getRegistryManifest, resolveApp, virtualManifest } from "../lib/registry";
 import type { ResolvedApp } from "../lib/types";
@@ -37,8 +38,12 @@ export function AppDetailPage() {
 
   const html = useMemo(() => {
     if (!readme) return "";
-    // marked@14 supports sync-mode via parse.
-    return marked.parse(readme, { async: false }) as string;
+    const raw = marked.parse(readme, { async: false }) as string;
+    return DOMPurify.sanitize(raw, {
+      ADD_ATTR: ["target", "rel"],
+      FORBID_TAGS: ["style", "script", "iframe", "object", "embed", "form"],
+      FORBID_ATTR: ["style", "onerror", "onload", "onclick"],
+    });
   }, [readme]);
 
   if (error) {
@@ -123,13 +128,7 @@ export function AppDetailPage() {
       <section>
         <h2 className={styles.sectionTitle}>README</h2>
         {html ? (
-          <div
-            className={styles.readme}
-            // README content is fetched from the GitHub API; we render it as HTML
-            // for the desktop app. In a browser-only build you'd want a sanitizer
-            // like DOMPurify here.
-            dangerouslySetInnerHTML={{ __html: html }}
-          />
+          <div className={styles.readme} dangerouslySetInnerHTML={{ __html: html }} />
         ) : (
           <div className={styles.empty}>No README available.</div>
         )}
