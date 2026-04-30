@@ -1,0 +1,14 @@
+{
+  "apps": [
+    "neovim",
+    "zed",
+    "ollama",
+    "obsidian",
+    "helix",
+    "starship",
+    "lazygit",
+    "bat",
+    "ripgrep",
+    "fd"
+  ]
+}

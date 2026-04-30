@@ -1,0 +1,30 @@
+{
+  "slug": "obsidian",
+  "repo": "obsidianmd/obsidian-releases",
+  "name": "Obsidian",
+  "tagline": "A powerful knowledge base on top of a local folder of Markdown files.",
+  "category": "productivity",
+  "tags": ["notes", "markdown", "pkm"],
+  "verified": true,
+  "featured": true,
+  "assets": [
+    {
+      "platform": "linux",
+      "arch": "x86_64",
+      "kind": "appimage",
+      "match": "Obsidian-.*\\.AppImage$"
+    },
+    {
+      "platform": "macos",
+      "arch": "x86_64",
+      "kind": "dmg",
+      "match": "Obsidian-.*(?<!arm64)\\.dmg$"
+    },
+    {
+      "platform": "windows",
+      "arch": "x86_64",
+      "kind": "exe",
+      "match": "Obsidian-.*\\.exe$"
+    }
+  ]
+}

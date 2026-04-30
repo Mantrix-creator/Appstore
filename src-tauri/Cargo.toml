@@ -1,0 +1,68 @@
+[package]
+name = "appstore"
+version = "0.1.0"
+description = "Decentralized GitHub-native application store"
+authors = ["Shlok Tiwari"]
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/Mantrix-creator/Appstore"
+rust-version = "1.77"
+
+[lib]
+name = "appstore_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[[bin]]
+name = "appstore"
+path = "src/main.rs"
+
+[build-dependencies]
+tauri-build = { version = "2.0", features = [] }
+
+[dependencies]
+tauri = { version = "2.1", features = [] }
+tauri-plugin-dialog = "2.0"
+tauri-plugin-opener = "2.0"
+tauri-plugin-os = "2.0"
+tauri-plugin-shell = "2.0"
+
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Networking & async
+tokio = { version = "1", features = ["full"] }
+reqwest = { version = "0.12", default-features = false, features = [
+    "rustls-tls",
+    "stream",
+    "json",
+] }
+futures-util = "0.3"
+
+# Crypto & hashing
+sha2 = "0.10"
+hex = "0.4"
+
+# Archive extraction
+flate2 = "1"
+tar = "0.4"
+zip = { version = "2.2", default-features = false, features = ["deflate"] }
+
+# Error handling & logging
+thiserror = "1"
+log = "0.4"
+env_logger = "0.11"
+
+# Filesystem helpers
+dirs = "5"
+
+[features]
+# This feature is used for production builds or when a dev server is not specified,
+# DO NOT REMOVE!!
+custom-protocol = ["tauri/custom-protocol"]
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = true
+opt-level = "s"
+strip = true

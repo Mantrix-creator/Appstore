@@ -1,0 +1,43 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.installedRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.installed {
+  color: var(--success);
+  font-weight: 500;
+}
+
+.assetInfo {
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  gap: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress {
+  width: 260px;
+  height: 6px;
+}
+
+.error {
+  color: var(--danger);
+  font-size: 12px;
+  max-width: 380px;
+  word-break: break-word;
+}
+
+.downloadFallback {
+  font-size: 11px;
+  color: var(--text-muted);
+}

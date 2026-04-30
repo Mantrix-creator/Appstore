@@ -1,0 +1,40 @@
+{
+  "slug": "ripgrep",
+  "repo": "BurntSushi/ripgrep",
+  "name": "ripgrep",
+  "tagline": "Recursively search directories for a regex pattern, insanely fast.",
+  "category": "developer-tools",
+  "tags": ["cli", "rust", "search"],
+  "verified": true,
+  "featured": true,
+  "assets": [
+    {
+      "platform": "linux",
+      "arch": "x86_64",
+      "kind": "tar.gz",
+      "match": "ripgrep-.*-x86_64-unknown-linux-musl\\.tar\\.gz$",
+      "binary_name": "rg"
+    },
+    {
+      "platform": "macos",
+      "arch": "aarch64",
+      "kind": "tar.gz",
+      "match": "ripgrep-.*-aarch64-apple-darwin\\.tar\\.gz$",
+      "binary_name": "rg"
+    },
+    {
+      "platform": "macos",
+      "arch": "x86_64",
+      "kind": "tar.gz",
+      "match": "ripgrep-.*-x86_64-apple-darwin\\.tar\\.gz$",
+      "binary_name": "rg"
+    },
+    {
+      "platform": "windows",
+      "arch": "x86_64",
+      "kind": "zip",
+      "match": "ripgrep-.*-x86_64-pc-windows-msvc\\.zip$",
+      "binary_name": "rg.exe"
+    }
+  ]
+}

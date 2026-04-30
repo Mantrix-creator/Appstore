@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "AppStore",
+  "version": "0.1.0",
+  "identifier": "app.mantrix.appstore",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "AppStore",
+        "width": 1100,
+        "height": 720,
+        "minWidth": 720,
+        "minHeight": 480,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' https://*.githubusercontent.com https://avatars.githubusercontent.com data: asset: https://asset.localhost; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.github.com https://*.githubusercontent.com https://github.com"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "category": "Utility",
+    "shortDescription": "GitHub-native app store",
+    "longDescription": "Decentralized GitHub-native application store. Discover, install, and update open-source apps directly from GitHub Releases."
+  },
+  "plugins": {}
+}
