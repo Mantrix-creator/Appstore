@@ -1,0 +1,48 @@
+{
+  "slug": "jq",
+  "repo": "jqlang/jq",
+  "name": "jq",
+  "tagline": "Command-line JSON processor: slice, filter, map, and transform structured data.",
+  "category": "developer-tools",
+  "tags": ["cli", "json", "c"],
+  "homepage": "https://jqlang.org",
+  "verified": true,
+  "featured": false,
+  "assets": [
+    {
+      "platform": "linux",
+      "arch": "x86_64",
+      "kind": "raw-binary",
+      "match": "jq-linux-amd64$",
+      "binary_name": "jq"
+    },
+    {
+      "platform": "linux",
+      "arch": "aarch64",
+      "kind": "raw-binary",
+      "match": "jq-linux-arm64$",
+      "binary_name": "jq"
+    },
+    {
+      "platform": "macos",
+      "arch": "x86_64",
+      "kind": "raw-binary",
+      "match": "jq-macos-amd64$",
+      "binary_name": "jq"
+    },
+    {
+      "platform": "macos",
+      "arch": "aarch64",
+      "kind": "raw-binary",
+      "match": "jq-macos-arm64$",
+      "binary_name": "jq"
+    },
+    {
+      "platform": "windows",
+      "arch": "x86_64",
+      "kind": "exe",
+      "match": "jq-windows-amd64\\.exe$",
+      "binary_name": "jq.exe"
+    }
+  ]
+}

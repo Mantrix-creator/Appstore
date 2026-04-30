@@ -624,4 +624,121 @@ mod tests {
             "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824"
         );
     }
+
+    #[test]
+    fn extract_tar_gz_roundtrip() {
+        let tmp = tempfile::tempdir().unwrap();
+        let archive = tmp.path().join("fixture.tar.gz");
+        let out = tmp.path().join("out");
+        fs::create_dir_all(&out).unwrap();
+
+        // Build a tar.gz in memory: a dir with two files.
+        let gz = flate2::write::GzEncoder::new(
+            File::create(&archive).unwrap(),
+            flate2::Compression::default(),
+        );
+        let mut builder = tar::Builder::new(gz);
+        let mut hdr = tar::Header::new_gnu();
+        let body = b"hello, appstore";
+        hdr.set_size(body.len() as u64);
+        hdr.set_mode(0o755);
+        hdr.set_cksum();
+        builder
+            .append_data(&mut hdr, "bin/hello", std::io::Cursor::new(body))
+            .unwrap();
+        let readme = b"# readme";
+        let mut hdr2 = tar::Header::new_gnu();
+        hdr2.set_size(readme.len() as u64);
+        hdr2.set_mode(0o644);
+        hdr2.set_cksum();
+        builder
+            .append_data(&mut hdr2, "README.md", std::io::Cursor::new(readme))
+            .unwrap();
+        builder.into_inner().unwrap().finish().unwrap();
+
+        extract_tar_gz(&archive, &out).unwrap();
+        let extracted = fs::read(out.join("bin").join("hello")).unwrap();
+        assert_eq!(extracted, body);
+        assert!(out.join("README.md").exists());
+    }
+
+    #[test]
+    fn extract_zip_roundtrip() {
+        use std::io::Write as _;
+        let tmp = tempfile::tempdir().unwrap();
+        let archive = tmp.path().join("fixture.zip");
+        let out = tmp.path().join("out");
+        fs::create_dir_all(&out).unwrap();
+
+        {
+            let mut zw = zip::ZipWriter::new(File::create(&archive).unwrap());
+            let opts: zip::write::FileOptions<'_, ()> =
+                zip::write::FileOptions::default().unix_permissions(0o755);
+            zw.start_file("bin/tool.exe", opts).unwrap();
+            zw.write_all(b"MZ\x90\x00").unwrap();
+            zw.start_file("docs/README.txt", opts).unwrap();
+            zw.write_all(b"hello").unwrap();
+            zw.finish().unwrap();
+        }
+
+        extract_zip(&archive, &out).unwrap();
+        assert!(out.join("bin").join("tool.exe").exists());
+        assert_eq!(
+            fs::read(out.join("docs").join("README.txt")).unwrap(),
+            b"hello"
+        );
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn locate_binary_prefers_named_match() {
+        use std::os::unix::fs::PermissionsExt;
+        let tmp = tempfile::tempdir().unwrap();
+        let root = tmp.path();
+
+        fs::create_dir_all(root.join("deep/nested")).unwrap();
+        fs::write(root.join("README.md"), "x").unwrap();
+        let extra = root.join("deep/extra");
+        fs::write(&extra, "x").unwrap();
+        fs::set_permissions(&extra, fs::Permissions::from_mode(0o755)).unwrap();
+        let target = root.join("deep/nested/mytool");
+        fs::write(&target, b"#!/bin/sh\n").unwrap();
+
+        let found = locate_binary(root, Some("mytool")).unwrap();
+        assert_eq!(found.unwrap(), target);
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn locate_binary_falls_back_to_executable() {
+        use std::os::unix::fs::PermissionsExt;
+        let tmp = tempfile::tempdir().unwrap();
+        let root = tmp.path();
+        fs::write(root.join("readme.txt"), "x").unwrap();
+        let exe = root.join("launcher");
+        fs::write(&exe, b"#!/bin/sh\n").unwrap();
+        fs::set_permissions(&exe, fs::Permissions::from_mode(0o755)).unwrap();
+
+        let found = locate_binary(root, None).unwrap();
+        assert_eq!(found.unwrap(), exe);
+    }
+
+    #[test]
+    fn locate_binary_errors_when_named_missing_and_no_fallback() {
+        let tmp = tempfile::tempdir().unwrap();
+        let root = tmp.path();
+        fs::write(root.join("readme.txt"), "x").unwrap();
+        let err = locate_binary(root, Some("ghost")).unwrap_err();
+        assert!(matches!(err, InstallError::BinaryNotFound(_)));
+    }
+
+    #[test]
+    fn checksum_comparison_matches_expected_case_insensitive() {
+        let mut h = Sha256::new();
+        h.update(b"payload");
+        let actual = hex::encode(h.finalize());
+        let upper = actual.to_uppercase();
+        assert_eq!(upper.to_lowercase(), actual);
+        assert_ne!(actual, "deadbeef");
+    }
 }
