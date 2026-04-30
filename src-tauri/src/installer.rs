@@ -20,6 +20,7 @@ use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use tauri::{AppHandle, Emitter, Runtime};
 
+use crate::signature::{verify_cosign_blob, SignatureError};
 use crate::storage;
 
 #[derive(Debug, thiserror::Error)]
@@ -32,6 +33,8 @@ pub enum InstallError {
     Zip(#[from] zip::result::ZipError),
     #[error("checksum mismatch: expected {expected}, got {actual}")]
     ChecksumMismatch { expected: String, actual: String },
+    #[error("signature verification failed: {0}")]
+    SignatureFailed(#[from] SignatureError),
     #[allow(dead_code)]
     #[error("unsupported install kind: {0}")]
     UnsupportedKind(String),
@@ -85,6 +88,16 @@ impl InstallKind {
     }
 }
 
+#[derive(Debug, Deserialize, Clone)]
+#[serde(tag = "method", rename_all = "kebab-case")]
+pub enum SignatureSpec {
+    /// Keyed cosign-style ECDSA P-256 blob signature.
+    CosignBlob {
+        public_key_url: String,
+        signature_url: String,
+    },
+}
+
 #[derive(Debug, Deserialize)]
 pub struct InstallArgs {
     pub slug: String,
@@ -94,6 +107,8 @@ pub struct InstallArgs {
     pub kind: InstallKind,
     pub expected_sha256: Option<String>,
     pub binary_name: Option<String>,
+    #[serde(default)]
+    pub signature: Option<SignatureSpec>,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -258,6 +273,13 @@ async fn install_app_inner<R: Runtime>(
                 expected: want,
                 actual: sha_hex,
             });
+        }
+    }
+
+    if let Some(spec) = &args.signature {
+        if let Err(e) = verify_signature(&client, &download_path, spec).await {
+            let _ = fs::remove_file(&download_path);
+            return Err(e);
         }
     }
 
@@ -495,6 +517,36 @@ fn is_likely_executable(path: &Path) -> bool {
         }
     }
     false
+}
+
+async fn verify_signature(
+    client: &reqwest::Client,
+    artifact_path: &Path,
+    spec: &SignatureSpec,
+) -> Result<(), InstallError> {
+    let SignatureSpec::CosignBlob {
+        public_key_url,
+        signature_url,
+    } = spec;
+
+    let artifact = fs::read(artifact_path)?;
+    let signature_b64 = client
+        .get(signature_url)
+        .send()
+        .await?
+        .error_for_status()?
+        .text()
+        .await?;
+    let public_key_pem = client
+        .get(public_key_url)
+        .send()
+        .await?
+        .error_for_status()?
+        .text()
+        .await?;
+
+    verify_cosign_blob(&artifact, &signature_b64, &public_key_pem)?;
+    Ok(())
 }
 
 fn make_executable(path: &Path) -> Result<(), InstallError> {

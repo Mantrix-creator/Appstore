@@ -12,6 +12,12 @@ import type { InstallKind, InstallProgress, InstalledAppRecord } from "./types";
 
 const IS_TAURI = typeof window !== "undefined" && "__TAURI_INTERNALS__" in window;
 
+export interface InstallSignatureArgs {
+  method: "cosign-blob";
+  public_key_url: string;
+  signature_url: string;
+}
+
 export interface InstallArgs {
   slug: string;
   repo: string;
@@ -20,6 +26,7 @@ export interface InstallArgs {
   kind: InstallKind;
   expected_sha256?: string;
   binary_name?: string;
+  signature?: InstallSignatureArgs;
 }
 
 export async function installApp(args: InstallArgs): Promise<InstalledAppRecord> {

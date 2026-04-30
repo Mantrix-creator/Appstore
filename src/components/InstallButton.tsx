@@ -27,6 +27,29 @@ export function InstallButton({ app }: { app: ResolvedApp }) {
     setBusy(true);
     setError(null);
     try {
+      const sig = match.pattern?.signature;
+      let signature: undefined | { method: "cosign-blob"; public_key_url: string; signature_url: string };
+      if (sig) {
+        let signature_url = sig.signature_url;
+        if (!signature_url && sig.signature_match) {
+          const re = new RegExp(sig.signature_match, "i");
+          const found = release.assets.find((a) => re.test(a.name));
+          if (!found) {
+            throw new Error(
+              `Signature asset matching /${sig.signature_match}/ not found on this release.`,
+            );
+          }
+          signature_url = found.browser_download_url;
+        }
+        if (!signature_url) {
+          throw new Error("Signature spec missing signature_url and signature_match.");
+        }
+        signature = {
+          method: "cosign-blob",
+          public_key_url: sig.public_key_url,
+          signature_url,
+        };
+      }
       await installApp({
         slug: app.slug,
         repo: app.repo,
@@ -34,6 +57,7 @@ export function InstallButton({ app }: { app: ResolvedApp }) {
         download_url: match.asset.browser_download_url,
         kind: match.kind,
         binary_name: match.pattern?.binary_name,
+        signature,
       });
       await refreshInstalled();
     } catch (err) {
