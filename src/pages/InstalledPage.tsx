@@ -1,13 +1,47 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useAppContext } from "../state/AppContext";
 import { uninstallApp } from "../lib/installer";
-import { useState } from "react";
+import { getLatestRelease } from "../lib/github";
 import styles from "./Pages.module.css";
+
+type LatestMap = Record<string, { tag: string | null; loading: boolean }>;
 
 export function InstalledPage() {
   const { installed, desktop, refreshInstalled } = useAppContext();
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [latest, setLatest] = useState<LatestMap>({});
+
+  useEffect(() => {
+    if (installed.length === 0) return;
+    let cancelled = false;
+    setLatest((prev) => {
+      const next: LatestMap = { ...prev };
+      for (const a of installed) next[a.slug] = next[a.slug] ?? { tag: null, loading: true };
+      return next;
+    });
+    (async () => {
+      for (const app of installed) {
+        const [owner, repo] = app.repo.split("/");
+        if (!owner || !repo) continue;
+        try {
+          const rel = await getLatestRelease(owner, repo);
+          if (cancelled) return;
+          setLatest((prev) => ({
+            ...prev,
+            [app.slug]: { tag: rel?.tag_name ?? null, loading: false },
+          }));
+        } catch {
+          if (cancelled) return;
+          setLatest((prev) => ({ ...prev, [app.slug]: { tag: null, loading: false } }));
+        }
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [installed]);
 
   async function handleUninstall(slug: string) {
     setBusy(slug);
@@ -50,6 +84,7 @@ export function InstalledPage() {
               <th>Slug</th>
               <th>Repo</th>
               <th>Version</th>
+              <th>Status</th>
               <th>Installed</th>
               <th>Kind</th>
               <th></th>
@@ -58,6 +93,9 @@ export function InstalledPage() {
           <tbody>
             {installed.map((app) => {
               const [owner, repo] = app.repo.split("/");
+              const state = latest[app.slug];
+              const hasUpdate =
+                state && !state.loading && state.tag && state.tag !== app.version;
               return (
                 <tr key={app.slug}>
                   <td>
@@ -66,6 +104,23 @@ export function InstalledPage() {
                   <td>{app.repo}</td>
                   <td>
                     <code>{app.version}</code>
+                  </td>
+                  <td>
+                    {!state || state.loading ? (
+                      <span className={styles.updateStatus}>Checking…</span>
+                    ) : hasUpdate ? (
+                      <Link
+                        to={`/app/${owner}/${repo}`}
+                        className={styles.updateAvailable}
+                        title={`Latest: ${state.tag}`}
+                      >
+                        Update to {state.tag}
+                      </Link>
+                    ) : state.tag ? (
+                      <span className={styles.updateCurrent}>Up to date</span>
+                    ) : (
+                      <span className={styles.updateStatus}>—</span>
+                    )}
                   </td>
                   <td>{new Date(app.installed_at).toLocaleDateString()}</td>
                   <td>{app.kind}</td>

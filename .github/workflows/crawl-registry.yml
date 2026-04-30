@@ -1,0 +1,47 @@
+name: Crawl registry candidates
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Every Monday at 06:00 UTC
+    - cron: "0 6 * * 1"
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run crawler
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/crawl-registry.mjs
+
+      - name: Open PR with new candidates
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: registry/crawler-${{ github.run_id }}
+          commit-message: "registry: crawler-discovered candidate manifests"
+          title: "Registry: crawler-discovered candidates"
+          body: |
+            Automated suggestions from `scripts/crawl-registry.mjs`.
+
+            Each file in `registry/candidates/` is a manifest stub for a repo that:
+            - has ≥ the configured star threshold
+            - publishes release binaries on its latest tag
+            - isn't already in `registry/apps/` or `registry/candidates/`
+
+            **Maintainer action:** for each file you want to publish, move it into
+            `registry/apps/`, add the `assets` array (platform/arch/kind/match regex),
+            set `verified: true`, and add the slug to `registry/index.json`.
+          add-paths: |
+            registry/candidates/**
+          delete-branch: true
+          labels: registry,automated
