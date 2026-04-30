@@ -110,14 +110,26 @@ export async function resolveApp(manifest: AppManifest): Promise<ResolvedApp> {
 }
 
 /**
- * Resolve every manifest in the registry, swallowing per-app errors so a
- * single bad entry doesn't break the browse page.
+ * Resolve every manifest in the registry. Individual failures are dropped so
+ * that one broken entry doesn't break the browse page — but if *every*
+ * manifest fails we throw, so the UI can surface the underlying reason (most
+ * commonly the 60 req/hr anonymous rate limit on GitHub).
  */
 export async function resolveAll(manifests: AppManifest[]): Promise<ResolvedApp[]> {
+  if (manifests.length === 0) return [];
   const results = await Promise.allSettled(manifests.map((m) => resolveApp(m)));
-  return results
+  const fulfilled = results
     .filter((r): r is PromiseFulfilledResult<ResolvedApp> => r.status === "fulfilled")
     .map((r) => r.value);
+  if (fulfilled.length === 0) {
+    const first = results.find((r) => r.status === "rejected") as
+      | PromiseRejectedResult
+      | undefined;
+    const reason =
+      first?.reason instanceof Error ? first.reason.message : String(first?.reason ?? "unknown");
+    throw new Error(`Failed to resolve any registry apps: ${reason}`);
+  }
+  return fulfilled;
 }
 
 /**
