@@ -1,0 +1,48 @@
+{
+  "slug": "gh",
+  "repo": "cli/cli",
+  "name": "GitHub CLI",
+  "tagline": "GitHub on the command line — issues, PRs, releases, Actions, and more.",
+  "category": "developer-tools",
+  "tags": ["cli", "git", "github"],
+  "homepage": "https://cli.github.com",
+  "verified": true,
+  "featured": true,
+  "assets": [
+    {
+      "platform": "linux",
+      "arch": "x86_64",
+      "kind": "tar.gz",
+      "match": "gh_.*_linux_amd64\\.tar\\.gz$",
+      "binary_name": "gh"
+    },
+    {
+      "platform": "linux",
+      "arch": "aarch64",
+      "kind": "tar.gz",
+      "match": "gh_.*_linux_arm64\\.tar\\.gz$",
+      "binary_name": "gh"
+    },
+    {
+      "platform": "macos",
+      "arch": "x86_64",
+      "kind": "zip",
+      "match": "gh_.*_macOS_amd64\\.zip$",
+      "binary_name": "gh"
+    },
+    {
+      "platform": "macos",
+      "arch": "aarch64",
+      "kind": "zip",
+      "match": "gh_.*_macOS_arm64\\.zip$",
+      "binary_name": "gh"
+    },
+    {
+      "platform": "windows",
+      "arch": "x86_64",
+      "kind": "zip",
+      "match": "gh_.*_windows_amd64\\.zip$",
+      "binary_name": "gh.exe"
+    }
+  ]
+}

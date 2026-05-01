@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { marked } from "marked";
-import DOMPurify from "dompurify";
 import { getReadme } from "../lib/github";
+import { renderMarkdown } from "../lib/sanitize";
 import { getRegistryManifest, resolveApp, virtualManifest } from "../lib/registry";
 import type { ResolvedApp } from "../lib/types";
 import { InstallButton } from "../components/InstallButton";
@@ -36,15 +35,11 @@ export function AppDetailPage() {
     };
   }, [owner, repo]);
 
-  const html = useMemo(() => {
-    if (!readme) return "";
-    const raw = marked.parse(readme, { async: false }) as string;
-    return DOMPurify.sanitize(raw, {
-      ADD_ATTR: ["target", "rel"],
-      FORBID_TAGS: ["style", "script", "iframe", "object", "embed", "form"],
-      FORBID_ATTR: ["style", "onerror", "onload", "onclick"],
-    });
-  }, [readme]);
+  const html = useMemo(() => (readme ? renderMarkdown(readme) : ""), [readme]);
+  const releaseNotes = useMemo(
+    () => (app?.latest_release?.body ? renderMarkdown(app.latest_release.body) : ""),
+    [app?.latest_release?.body],
+  );
 
   if (error) {
     return (
@@ -106,6 +101,15 @@ export function AppDetailPage() {
                 View on GitHub ↗
               </a>
             </div>
+            {releaseNotes ? (
+              <details className={styles.releaseNotes} open>
+                <summary>Release notes</summary>
+                <div
+                  className={styles.readme}
+                  dangerouslySetInnerHTML={{ __html: releaseNotes }}
+                />
+              </details>
+            ) : null}
             <details className={styles.assetList}>
               <summary>All release assets ({release.assets.length})</summary>
               <ul>

@@ -4,7 +4,11 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+    branches:
+      - main
+      # Run CI on stacked PRs too (each phase of the rollout targets the
+      # previous phase's branch rather than main).
+      - "devin/**"
 
 concurrency:
   group: ci-${{ github.ref }}

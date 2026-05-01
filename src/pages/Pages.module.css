@@ -161,6 +161,21 @@
   margin-bottom: 20px;
 }
 
+.releaseNotes {
+  margin-top: 14px;
+}
+
+.releaseNotes summary {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.releaseNotes .readme {
+  margin-top: 10px;
+}
+
 .assetList {
   margin-top: 10px;
 }

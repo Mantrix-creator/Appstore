@@ -1,0 +1,40 @@
+{
+  "slug": "delta",
+  "repo": "dandavison/delta",
+  "name": "delta",
+  "tagline": "A syntax-highlighting pager for git, diff, grep, and blame output.",
+  "category": "developer-tools",
+  "tags": ["cli", "rust", "git", "diff"],
+  "verified": true,
+  "featured": false,
+  "assets": [
+    {
+      "platform": "linux",
+      "arch": "x86_64",
+      "kind": "tar.gz",
+      "match": "delta-.*-x86_64-unknown-linux-musl\\.tar\\.gz$",
+      "binary_name": "delta"
+    },
+    {
+      "platform": "linux",
+      "arch": "aarch64",
+      "kind": "tar.gz",
+      "match": "delta-.*-aarch64-unknown-linux-gnu\\.tar\\.gz$",
+      "binary_name": "delta"
+    },
+    {
+      "platform": "macos",
+      "arch": "x86_64",
+      "kind": "tar.gz",
+      "match": "delta-.*-x86_64-apple-darwin\\.tar\\.gz$",
+      "binary_name": "delta"
+    },
+    {
+      "platform": "windows",
+      "arch": "x86_64",
+      "kind": "zip",
+      "match": "delta-.*-x86_64-pc-windows-msvc\\.zip$",
+      "binary_name": "delta.exe"
+    }
+  ]
+}

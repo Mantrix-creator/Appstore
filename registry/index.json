@@ -9,6 +9,11 @@
     "lazygit",
     "bat",
     "ripgrep",
-    "fd"
+    "fd",
+    "gh",
+    "jq",
+    "delta",
+    "hyperfine",
+    "zoxide"
   ]
 }
