@@ -65,7 +65,36 @@
           },
           "match": { "type": "string" },
           "checksum_match": { "type": "string" },
-          "binary_name": { "type": "string" }
+          "binary_name": { "type": "string" },
+          "signature": {
+            "type": "object",
+            "required": ["method"],
+            "additionalProperties": false,
+            "properties": {
+              "method": {
+                "enum": ["cosign-blob"],
+                "description": "Signature scheme. Only keyed cosign blob signatures are supported today; keyless (Fulcio+Rekor) is a planned follow-up."
+              },
+              "public_key_url": {
+                "type": "string",
+                "format": "uri",
+                "description": "HTTPS URL of the PEM-encoded ECDSA P-256 public key."
+              },
+              "signature_match": {
+                "type": "string",
+                "description": "Regex matched against release.assets[].name to find the base64 signature file (e.g. 'app-.*\\.tar\\.gz\\.sig$')."
+              },
+              "signature_url": {
+                "type": "string",
+                "format": "uri",
+                "description": "Explicit HTTPS URL of the base64 signature. Use this OR signature_match — not both."
+              }
+            },
+            "oneOf": [
+              { "required": ["method", "public_key_url", "signature_match"] },
+              { "required": ["method", "public_key_url", "signature_url"] }
+            ]
+          }
         }
       }
     }

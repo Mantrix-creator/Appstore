@@ -185,6 +185,13 @@ Extensive example with explicit asset matching:
 - **Integrity:** every download is SHA-256 hashed. If the manifest
   supplies `expected_sha256`, a mismatch aborts the install and deletes
   the partial download.
+- **Signatures:** manifests may declare a cosign-style ECDSA P-256
+  `signature` block per asset. After the SHA-256 check passes the
+  client fetches the signature and public key over HTTPS and verifies
+  the blob locally (no `cosign` binary required, no Rekor round-trip).
+  A tampered artifact or mismatched key aborts the install. See
+  [`registry/README.md`](./registry/README.md) for manifest syntax and
+  a cosign-signing walkthrough.
 - **Privilege:** the desktop client never asks for root. Installs go
   under the per-user data directory (`$XDG_DATA_HOME/AppStore` on
   Linux, `~/Library/Application Support/AppStore` on macOS,
@@ -195,7 +202,9 @@ Extensive example with explicit asset matching:
 
 ## Roadmap
 
-- [ ] Cosign / Sigstore signature verification for signed releases.
+- [x] Cosign / Sigstore keyed signature verification (ECDSA P-256
+      blob signatures). See `registry/README.md#signature-verification`.
+- [ ] Keyless (Fulcio + Rekor) signature verification.
 - [ ] Auto-update (detect new releases in the background).
 - [ ] Manifest-provided `preinstall` / `postinstall` hooks (sandboxed).
 - [ ] Fork-as-database pattern for user-submitted reviews/stars.

@@ -1,4 +1,5 @@
 mod installer;
+mod signature;
 mod storage;
 
 pub use installer::{InstallArgs, InstalledAppRecord};

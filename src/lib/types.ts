@@ -24,6 +24,17 @@ export type InstallKind =
   | "msi"
   | "raw-binary";
 
+export type SignatureSpec = {
+  /** Only keyed cosign blob signatures today; keyless coming later. */
+  method: "cosign-blob";
+  /** PEM-encoded ECDSA P-256 public key served over HTTPS. */
+  public_key_url: string;
+  /** Either a regex matched against release asset names ... */
+  signature_match?: string;
+  /** ... or an explicit HTTPS URL to the base64 signature blob. */
+  signature_url?: string;
+};
+
 export interface AssetPattern {
   platform: Platform;
   arch: Architecture;
@@ -34,6 +45,8 @@ export interface AssetPattern {
   checksum_match?: string;
   /** Name of the installed binary to add to PATH. Optional. */
   binary_name?: string;
+  /** Optional cosign-style signature verification. */
+  signature?: SignatureSpec;
 }
 
 /**
