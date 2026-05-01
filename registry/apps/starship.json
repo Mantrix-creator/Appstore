@@ -1,0 +1,39 @@
+{
+  "slug": "starship",
+  "repo": "starship/starship",
+  "name": "Starship",
+  "tagline": "The minimal, blazing-fast, and infinitely customizable prompt for any shell.",
+  "category": "developer-tools",
+  "tags": ["shell", "prompt", "rust"],
+  "verified": true,
+  "assets": [
+    {
+      "platform": "linux",
+      "arch": "x86_64",
+      "kind": "tar.gz",
+      "match": "starship-x86_64-unknown-linux-gnu\\.tar\\.gz$",
+      "binary_name": "starship"
+    },
+    {
+      "platform": "macos",
+      "arch": "aarch64",
+      "kind": "tar.gz",
+      "match": "starship-aarch64-apple-darwin\\.tar\\.gz$",
+      "binary_name": "starship"
+    },
+    {
+      "platform": "macos",
+      "arch": "x86_64",
+      "kind": "tar.gz",
+      "match": "starship-x86_64-apple-darwin\\.tar\\.gz$",
+      "binary_name": "starship"
+    },
+    {
+      "platform": "windows",
+      "arch": "x86_64",
+      "kind": "zip",
+      "match": "starship-x86_64-pc-windows-msvc\\.zip$",
+      "binary_name": "starship.exe"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "slug": "ollama",
+  "repo": "ollama/ollama",
+  "name": "Ollama",
+  "tagline": "Run large language models locally.",
+  "category": "developer-tools",
+  "tags": ["ai", "llm", "local"],
+  "verified": true,
+  "featured": true,
+  "assets": [
+    {
+      "platform": "linux",
+      "arch": "x86_64",
+      "kind": "tar.gz",
+      "match": "ollama-linux-amd64\\.tgz$",
+      "binary_name": "ollama"
+    },
+    {
+      "platform": "macos",
+      "arch": "aarch64",
+      "kind": "zip",
+      "match": "ollama-darwin\\.zip$",
+      "binary_name": "ollama"
+    },
+    {
+      "platform": "windows",
+      "arch": "x86_64",
+      "kind": "exe",
+      "match": "ollamasetup\\.exe$"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "slug": "lazygit",
+  "repo": "jesseduffield/lazygit",
+  "name": "Lazygit",
+  "tagline": "A simple terminal UI for git commands.",
+  "category": "developer-tools",
+  "tags": ["git", "tui", "terminal"],
+  "verified": true,
+  "assets": [
+    {
+      "platform": "linux",
+      "arch": "x86_64",
+      "kind": "tar.gz",
+      "match": "lazygit_.*_Linux_x86_64\\.tar\\.gz$",
+      "binary_name": "lazygit"
+    },
+    {
+      "platform": "macos",
+      "arch": "aarch64",
+      "kind": "tar.gz",
+      "match": "lazygit_.*_Darwin_arm64\\.tar\\.gz$",
+      "binary_name": "lazygit"
+    },
+    {
+      "platform": "macos",
+      "arch": "x86_64",
+      "kind": "tar.gz",
+      "match": "lazygit_.*_Darwin_x86_64\\.tar\\.gz$",
+      "binary_name": "lazygit"
+    },
+    {
+      "platform": "windows",
+      "arch": "x86_64",
+      "kind": "zip",
+      "match": "lazygit_.*_Windows_x86_64\\.zip$",
+      "binary_name": "lazygit.exe"
+    }
+  ]
+}

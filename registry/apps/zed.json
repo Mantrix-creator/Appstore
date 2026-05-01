@@ -1,0 +1,31 @@
+{
+  "slug": "zed",
+  "repo": "zed-industries/zed",
+  "name": "Zed",
+  "tagline": "A high-performance, multiplayer code editor.",
+  "category": "developer-tools",
+  "tags": ["editor", "collaborative", "rust"],
+  "verified": true,
+  "featured": true,
+  "assets": [
+    {
+      "platform": "linux",
+      "arch": "x86_64",
+      "kind": "tar.gz",
+      "match": "zed-linux-x86_64\\.tar\\.gz$",
+      "binary_name": "zed"
+    },
+    {
+      "platform": "macos",
+      "arch": "aarch64",
+      "kind": "dmg",
+      "match": "zed-aarch64-apple-darwin\\.dmg$"
+    },
+    {
+      "platform": "macos",
+      "arch": "x86_64",
+      "kind": "dmg",
+      "match": "zed-x86_64-apple-darwin\\.dmg$"
+    }
+  ]
+}

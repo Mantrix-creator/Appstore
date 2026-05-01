@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/Mantrix-creator/Appstore/main/registry/schema.json",
+  "title": "AppStore App Manifest",
+  "type": "object",
+  "required": ["slug", "repo"],
+  "additionalProperties": false,
+  "properties": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$",
+      "description": "URL-safe identifier."
+    },
+    "repo": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$",
+      "description": "GitHub 'owner/name'."
+    },
+    "name": { "type": "string" },
+    "tagline": { "type": "string", "maxLength": 240 },
+    "description": { "type": "string" },
+    "icon": { "type": "string", "format": "uri" },
+    "homepage": { "type": "string", "format": "uri" },
+    "category": {
+      "type": "string",
+      "enum": [
+        "developer-tools",
+        "productivity",
+        "media",
+        "communication",
+        "games",
+        "utilities",
+        "security",
+        "education",
+        "graphics",
+        "uncategorized"
+      ]
+    },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "license": { "type": "string" },
+    "verified": { "type": "boolean" },
+    "featured": { "type": "boolean" },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["platform", "arch", "kind", "match"],
+        "additionalProperties": false,
+        "properties": {
+          "platform": { "enum": ["linux", "macos", "windows"] },
+          "arch": { "enum": ["x86_64", "aarch64", "i686", "armv7"] },
+          "kind": {
+            "enum": [
+              "appimage",
+              "deb",
+              "rpm",
+              "tar.gz",
+              "zip",
+              "dmg",
+              "pkg",
+              "exe",
+              "msi",
+              "raw-binary"
+            ]
+          },
+          "match": { "type": "string" },
+          "checksum_match": { "type": "string" },
+          "binary_name": { "type": "string" }
+        }
+      }
+    }
+  }
+}

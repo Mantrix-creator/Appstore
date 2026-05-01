@@ -1,0 +1,303 @@
+.header {
+  margin-bottom: 28px;
+}
+
+.title {
+  font-size: 24px;
+  margin: 0 0 4px;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  margin: 0;
+  font-size: 13px;
+}
+
+.section {
+  margin-bottom: 36px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.sectionTitle {
+  font-size: 16px;
+  margin: 0 0 14px;
+  font-weight: 600;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.select {
+  min-width: 160px;
+}
+
+.empty {
+  color: var(--text-muted);
+  padding: 40px 20px;
+  text-align: center;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+.error {
+  padding: 14px;
+  background: rgba(248, 81, 73, 0.1);
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+}
+
+.errorHint {
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.searchBar {
+  margin-bottom: 24px;
+}
+
+.searchInput {
+  width: 100%;
+  max-width: 560px;
+  font-size: 15px;
+  padding: 10px 14px;
+}
+
+.skeleton {
+  min-height: 150px;
+  border-radius: var(--radius);
+  background: linear-gradient(90deg, var(--bg-elevated), var(--bg-hover), var(--bg-elevated));
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Detail page */
+.detail {
+  max-width: 900px;
+}
+
+.detailHeader {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.detailIcon {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  object-fit: cover;
+}
+
+.detailHeading {
+  flex: 1;
+  min-width: 0;
+}
+
+.detailTitle {
+  font-size: 28px;
+  margin: 0 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detailVerified {
+  color: var(--success);
+  font-size: 20px;
+}
+
+.detailRepo {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.detailTagline {
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.detailMeta {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+
+.installSection {
+  padding: 20px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 28px;
+}
+
+.detailRelease {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.assetList {
+  margin-top: 10px;
+}
+
+.assetList ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+
+.assetList li {
+  padding: 4px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+}
+
+.assetSize {
+  color: var(--text-muted);
+}
+
+.readme {
+  padding: 20px 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  line-height: 1.6;
+  overflow-x: auto;
+}
+
+.readme img {
+  max-width: 100%;
+}
+
+.readme h1,
+.readme h2,
+.readme h3 {
+  border-bottom: 1px solid var(--border-muted);
+  padding-bottom: 6px;
+}
+
+.readme table {
+  border-collapse: collapse;
+}
+
+.readme table th,
+.readme table td {
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border-muted);
+}
+
+.table th {
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Settings */
+.formRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.input {
+  flex: 1;
+  max-width: 400px;
+}
+
+.paragraph {
+  color: var(--text-muted);
+  max-width: 640px;
+  margin: 10px 0;
+}
+
+.saved {
+  color: var(--success);
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.dl {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 6px 16px;
+  font-size: 13px;
+  max-width: 400px;
+}
+
+.dl dt {
+  color: var(--text-muted);
+}
+
+.dl dd {
+  margin: 0;
+}
+
+.updateStatus {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.updateCurrent {
+  color: var(--success);
+  font-size: 12px;
+}
+
+.updateAvailable {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: rgba(56, 139, 253, 0.15);
+  color: var(--accent, #388bfd);
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.updateAvailable:hover {
+  background: rgba(56, 139, 253, 0.25);
+}
