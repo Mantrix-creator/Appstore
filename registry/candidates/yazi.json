@@ -1,0 +1,19 @@
+{
+  "slug": "yazi",
+  "repo": "sxyazi/yazi",
+  "name": "yazi",
+  "tagline": "💥 Blazing fast terminal file manager written in Rust, based on async I/O.",
+  "category": "developer-tools",
+  "tags": [
+    "android",
+    "asyncio",
+    "cli",
+    "command-line",
+    "concurrency",
+    "cross-platform",
+    "developer-tools",
+    "file-explorer"
+  ],
+  "verified": false,
+  "featured": false
+}

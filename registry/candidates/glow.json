@@ -1,0 +1,15 @@
+{
+  "slug": "glow",
+  "repo": "charmbracelet/glow",
+  "name": "glow",
+  "tagline": "Render markdown on the CLI, with pizzazz! 💅🏻",
+  "category": "developer-tools",
+  "tags": [
+    "cli",
+    "excitement",
+    "hacktoberfest",
+    "markdown"
+  ],
+  "verified": false,
+  "featured": false
+}

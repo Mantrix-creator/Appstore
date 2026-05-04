@@ -1,0 +1,19 @@
+{
+  "slug": "ultralytics",
+  "repo": "ultralytics/ultralytics",
+  "name": "ultralytics",
+  "tagline": "Ultralytics YOLO 🚀",
+  "category": "developer-tools",
+  "tags": [
+    "cli",
+    "computer-vision",
+    "deep-learning",
+    "hub",
+    "image-classification",
+    "instance-segmentation",
+    "machine-learning",
+    "object-detection"
+  ],
+  "verified": false,
+  "featured": false
+}

@@ -1,0 +1,19 @@
+{
+  "slug": "maigret",
+  "repo": "soxoj/maigret",
+  "name": "maigret",
+  "tagline": "🕵️‍♂️ Collect a dossier on a person by username from 3000+ sites",
+  "category": "developer-tools",
+  "tags": [
+    "blueteam",
+    "cli",
+    "cybersecurity",
+    "identification",
+    "infosec",
+    "investigation",
+    "namechecker",
+    "open-source"
+  ],
+  "verified": false,
+  "featured": false
+}

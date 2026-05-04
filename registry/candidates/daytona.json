@@ -1,0 +1,19 @@
+{
+  "slug": "daytona",
+  "repo": "daytonaio/daytona",
+  "name": "daytona",
+  "tagline": "Daytona is a Secure and Elastic Infrastructure for Running AI-Generated Code",
+  "category": "developer-tools",
+  "tags": [
+    "agentic-workflow",
+    "ai",
+    "ai-agents",
+    "ai-runtime",
+    "ai-sandboxes",
+    "code-execution",
+    "code-interpreter",
+    "developer-tools"
+  ],
+  "verified": false,
+  "featured": false
+}

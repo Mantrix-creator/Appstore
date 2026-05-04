@@ -1,0 +1,19 @@
+{
+  "slug": "bruno",
+  "repo": "usebruno/bruno",
+  "name": "bruno",
+  "tagline": "Opensource IDE For Exploring and Testing API's (lightweight alternative to Postman/Insomnia)",
+  "category": "developer-tools",
+  "tags": [
+    "api-client",
+    "api-testing",
+    "automation",
+    "developer-tools",
+    "git",
+    "graphql-client",
+    "http-client",
+    "javascript"
+  ],
+  "verified": false,
+  "featured": false
+}

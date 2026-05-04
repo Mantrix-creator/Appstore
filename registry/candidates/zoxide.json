@@ -1,0 +1,19 @@
+{
+  "slug": "zoxide",
+  "repo": "ajeetdsouza/zoxide",
+  "name": "zoxide",
+  "tagline": "A smarter cd command. Supports all major shells.",
+  "category": "developer-tools",
+  "tags": [
+    "autojump",
+    "bash",
+    "cli",
+    "command-line",
+    "command-line-tool",
+    "elvish",
+    "fasd",
+    "fish"
+  ],
+  "verified": false,
+  "featured": false
+}

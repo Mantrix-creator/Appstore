@@ -1,0 +1,19 @@
+{
+  "slug": "asdf",
+  "repo": "asdf-vm/asdf",
+  "name": "asdf",
+  "tagline": "Extendable version manager with support for Ruby, Node.js, Elixir, Erlang & more",
+  "category": "developer-tools",
+  "tags": [
+    "asdf-vm",
+    "bash",
+    "cli",
+    "elixir",
+    "elvish",
+    "erlang",
+    "fish",
+    "golang"
+  ],
+  "verified": false,
+  "featured": false
+}

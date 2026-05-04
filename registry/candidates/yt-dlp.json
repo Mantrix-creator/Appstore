@@ -1,0 +1,18 @@
+{
+  "slug": "yt-dlp",
+  "repo": "yt-dlp/yt-dlp",
+  "name": "yt-dlp",
+  "tagline": "A feature-rich command-line audio/video downloader",
+  "category": "developer-tools",
+  "tags": [
+    "cli",
+    "downloader",
+    "python",
+    "sponsorblock",
+    "youtube-dl",
+    "youtube-downloader",
+    "yt-dlp"
+  ],
+  "verified": false,
+  "featured": false
+}

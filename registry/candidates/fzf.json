@@ -1,0 +1,19 @@
+{
+  "slug": "fzf",
+  "repo": "junegunn/fzf",
+  "name": "fzf",
+  "tagline": ":cherry_blossom: A command-line fuzzy finder",
+  "category": "developer-tools",
+  "tags": [
+    "bash",
+    "cli",
+    "fish",
+    "fzf",
+    "go",
+    "neovim",
+    "tmux",
+    "unix"
+  ],
+  "verified": false,
+  "featured": false
+}

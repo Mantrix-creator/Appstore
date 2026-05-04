@@ -1,0 +1,19 @@
+{
+  "slug": "tqdm",
+  "repo": "tqdm/tqdm",
+  "name": "tqdm",
+  "tagline": ":zap: A Fast, Extensible Progress Bar for Python and CLI",
+  "category": "developer-tools",
+  "tags": [
+    "cli",
+    "closember",
+    "console",
+    "discord",
+    "gui",
+    "jupyter",
+    "keras",
+    "meter"
+  ],
+  "verified": false,
+  "featured": false
+}

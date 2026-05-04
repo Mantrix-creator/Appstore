@@ -1,0 +1,19 @@
+{
+  "slug": "gitleaks",
+  "repo": "gitleaks/gitleaks",
+  "name": "gitleaks",
+  "tagline": "Find secrets with Gitleaks 🔑",
+  "category": "developer-tools",
+  "tags": [
+    "ai-powered",
+    "ci-cd",
+    "cicd",
+    "cli",
+    "data-loss-prevention",
+    "devsecops",
+    "dlp",
+    "git"
+  ],
+  "verified": false,
+  "featured": false
+}

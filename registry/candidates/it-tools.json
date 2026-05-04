@@ -1,0 +1,19 @@
+{
+  "slug": "it-tools",
+  "repo": "CorentinTh/it-tools",
+  "name": "it-tools",
+  "tagline": "Collection of handy online tools for developers, with great UX. ",
+  "category": "developer-tools",
+  "tags": [
+    "converter",
+    "developer-productivity",
+    "developer-tools",
+    "frontend",
+    "javascript",
+    "productivity",
+    "tool",
+    "tools"
+  ],
+  "verified": false,
+  "featured": false
+}

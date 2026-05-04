@@ -1,0 +1,17 @@
+{
+  "slug": "hyperfine",
+  "repo": "sharkdp/hyperfine",
+  "name": "hyperfine",
+  "tagline": "A command-line benchmarking tool",
+  "category": "developer-tools",
+  "tags": [
+    "benchmark",
+    "cli",
+    "command-line",
+    "rust",
+    "terminal",
+    "tool"
+  ],
+  "verified": false,
+  "featured": false
+}

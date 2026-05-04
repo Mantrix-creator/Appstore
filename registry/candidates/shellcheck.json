@@ -1,0 +1,17 @@
+{
+  "slug": "shellcheck",
+  "repo": "koalaman/shellcheck",
+  "name": "shellcheck",
+  "tagline": "ShellCheck, a static analysis tool for shell scripts",
+  "category": "developer-tools",
+  "tags": [
+    "bash",
+    "developer-tools",
+    "haskell",
+    "linter",
+    "shell",
+    "static-analysis"
+  ],
+  "verified": false,
+  "featured": false
+}

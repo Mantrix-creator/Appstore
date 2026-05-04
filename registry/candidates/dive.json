@@ -1,0 +1,17 @@
+{
+  "slug": "dive",
+  "repo": "wagoodman/dive",
+  "name": "dive",
+  "tagline": "A tool for exploring each layer in a docker image",
+  "category": "developer-tools",
+  "tags": [
+    "cli",
+    "docker",
+    "docker-image",
+    "explorer",
+    "inspector",
+    "tui"
+  ],
+  "verified": false,
+  "featured": false
+}

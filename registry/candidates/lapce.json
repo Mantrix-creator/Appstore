@@ -1,0 +1,16 @@
+{
+  "slug": "lapce",
+  "repo": "lapce/lapce",
+  "name": "lapce",
+  "tagline": "Lightning-fast and Powerful Code Editor written in Rust",
+  "category": "developer-tools",
+  "tags": [
+    "code-editor",
+    "developer-tools",
+    "rust",
+    "text-editor",
+    "vim"
+  ],
+  "verified": false,
+  "featured": false
+}

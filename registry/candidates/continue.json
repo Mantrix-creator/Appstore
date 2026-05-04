@@ -1,0 +1,19 @@
+{
+  "slug": "continue",
+  "repo": "continuedev/continue",
+  "name": "continue",
+  "tagline": "⏩ Source-controlled AI checks, enforceable in CI. Powered by the open-source Continue CLI",
+  "category": "developer-tools",
+  "tags": [
+    "agent",
+    "ai",
+    "cli",
+    "developer-tools",
+    "jetbrains-plugin",
+    "llm",
+    "open-source",
+    "vs-code-extenstion"
+  ],
+  "verified": false,
+  "featured": false
+}

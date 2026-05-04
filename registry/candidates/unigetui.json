@@ -1,0 +1,19 @@
+{
+  "slug": "unigetui",
+  "repo": "Devolutions/UniGetUI",
+  "name": "UniGetUI",
+  "tagline": "UniGetUI: The Graphical Interface for your package managers. Could be terribly described as a package manager manager to manage your package managers",
+  "category": "developer-tools",
+  "tags": [
+    "chocolatey",
+    "cli",
+    "npm",
+    "package",
+    "package-manager",
+    "pip",
+    "scoop",
+    "unigetui"
+  ],
+  "verified": false,
+  "featured": false
+}

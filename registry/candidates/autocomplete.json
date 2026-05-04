@@ -1,0 +1,19 @@
+{
+  "slug": "autocomplete",
+  "repo": "withfig/autocomplete",
+  "name": "autocomplete",
+  "tagline": "IDE-style autocomplete for your existing terminal & shell",
+  "category": "developer-tools",
+  "tags": [
+    "autocomplete",
+    "bash",
+    "cli",
+    "fig",
+    "fish",
+    "hacktoberfest",
+    "iterm2",
+    "macos"
+  ],
+  "verified": false,
+  "featured": false
+}
